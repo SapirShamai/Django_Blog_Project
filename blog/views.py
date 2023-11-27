@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 
 def home(request):
+    """View for rendering the home page of the blog."""
+
     context = {
         'posts': Post.objects.all()
     }
@@ -13,6 +15,8 @@ def home(request):
 
 
 class PostListView(ListView):
+    """View for displaying a list of blog posts."""
+
     model = Post
     template_name = 'blog/home.html'
     context_object_name = 'posts'
@@ -21,6 +25,8 @@ class PostListView(ListView):
 
 
 class UserPostListView(ListView):
+    """View for displaying a list of blog posts by a specific user."""
+
     model = Post
     template_name = 'blog/user_post.html'
     context_object_name = 'posts'
@@ -32,10 +38,13 @@ class UserPostListView(ListView):
 
 
 class PostDetailView(DetailView):
+    """View for displaying details of a single blog post."""
+
     model = Post
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
+    """View for creating a new blog post."""
     model = Post
     fields = ['title', 'content']
 
@@ -45,6 +54,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """View for updating an existing blog post."""
+
     model = Post
     fields = ['title', 'content']
 
@@ -60,6 +71,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """View for deleting an existing blog post."""
     model = Post
     success_url = '/'
 
@@ -70,9 +82,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-
 def about(request):
+    """View for rendering the about page of the blog."""
+
     return render(request, 'blog/about.html', {'title': 'About'})
-
-
-

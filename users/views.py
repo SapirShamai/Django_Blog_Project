@@ -5,6 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 
 def register(request):
+    """  View for handling user registration.
+    If the request method is POST and the registration form is valid, a new user account is created,
+    and the user is redirected to the login page with a success message.
+    If the request method is GET, the registration form is displayed."""
+
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
@@ -19,6 +24,11 @@ def register(request):
 
 @login_required
 def profile(request):
+    """   View for managing user profiles.
+    If the request method is POST and both the user update form and profile update form are valid,
+    the user and profile information are updated, and a success message is displayed.
+    If the request method is GET, the user and profile update forms are displayed."""
+
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)

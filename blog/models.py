@@ -5,6 +5,8 @@ from django.urls import reverse
 
 
 class Post(models.Model):
+    """Post object"""
+
     title = models.CharField(max_length=100)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
@@ -14,4 +16,5 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'pk': self.pk})
+        """Returns the URL to access a detail record for this post."""
+        return reverse('blog:post-detail', kwargs={'pk': self.pk})
