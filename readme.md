@@ -26,6 +26,8 @@ source venv/bin/activate   # On Linux/macOS, on Windows use .\venv\Scripts\activ
 
 pip install -r requirements.txt
 
+copy .env.sample file into .env file and fill out your credentials
+
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
